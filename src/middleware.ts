@@ -7,8 +7,8 @@ const isPublicRoute = createRouteMatcher([
     '/api/webhook/clerk',
     '/api/webhook/stripe',
     '/api/uploadthing',
-    '/sign-in',  // Add sign-in route if it's public
-    '/sign-up'   // Add sign-up route if it's public
+    '/sign-in',  // Ensure this is public
+    '/sign-up'   // Ensure this is public
 ]);
 
 // Define ignored routes (routes that should be public and bypass authentication)
