@@ -63,9 +63,9 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
                             emptyTitle="No Events Found"
                             emptyStateSubtext="Come back later"
                             collectionType="All_Events"
-                            limit={6}
+                            limit={3}
                             page={page}
-                            totalPages={6}
+                            totalPages={3}
                         />
                     </section>
                 </>
