@@ -26,7 +26,7 @@ import { usePathname } from 'next/navigation';
 
 const Header = () => {
     return (
-        <header className='h-12 px-4 flex flex-row justify-between items-center'>
+        <header className='h-12 px-4 py-2 flex flex-row justify-between items-center'>
             <Link href='/'>
                 <Image src='/assets/logo.png' alt='log img' height={100} width={150} />
             </Link>
@@ -34,15 +34,15 @@ const Header = () => {
                 <NavItems />
             </div>
 
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 '>
                 <SignedOut>
                     <Button variant="secondary" className='rounded-full min-w-20 bg-white border-[1px] border-black'>
                         <SignInButton />
                     </Button>
                 </SignedOut>
-                <div className='md:hidden'>
-                    <Sheet>
-                        <SheetTrigger>
+                <div className='md:hidden '>
+                    <Sheet >
+                        <SheetTrigger className=''>
                             <Button className='rounded-full cursor-pointer' asChild variant="secondary">
                                 <MenuIcon size={80} />
                             </Button>

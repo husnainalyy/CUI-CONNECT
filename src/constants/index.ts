@@ -4,11 +4,29 @@ export const headerLinks = [
         route: '/',
     },
     {
+        label: 'About Us',
+        route: '/aboutUs',
+    },
+    {
         label: 'All Event',
-        route: '/events/all-events',
+        route: '/events/allEvents',
     },
     {
         label: 'My Profile',
         route: '/profile',
     },
 ]
+
+
+export const eventDefaultValues = {
+    title: '',
+    description: '',
+    location: '',
+    imageUrl: '',
+    startDateTime: new Date(),
+    endDateTime: new Date(),
+    categoryId: '',
+    price: '',
+    isFree: false,
+    url: '',
+}

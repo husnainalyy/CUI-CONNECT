@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-
+import mongoose from 'mongoose'
 import {dbConnect} from '../dataBase/dbConnect'
 import User from '../dataBase/user.model'
 import Order from '../dataBase/order.model'
@@ -71,5 +71,18 @@ export const deleteUser = async (clerkId: string) => {
         return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null
     } catch (error) {
         handleError(error)
+    }
+}
+
+
+export const getUserRole = async (userID: string) => {
+    try {
+        await dbConnect();
+        console.log('userID', userID);
+        const user = await User.findOne({ _id: new mongoose.Types.ObjectId(userID) });
+        if (!user) throw new Error('User not found');
+        return user.role;
+    } catch (error) {
+        handleError(error);
     }
 }
