@@ -1,26 +1,35 @@
-import {ClerkProvider} from '@clerk/nextjs'
-import './globals.css'
+import { ClerkProvider } from '@clerk/nextjs';
+import './globals.css';
+import type { Metadata } from 'next';
 
-import { Inter as FontSans } from "next/font/google"
-import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/shared/theme-provider"
+import { Inter as FontSans } from 'next/font/google';
+import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/shared/theme-provider';
 
 const fontSans = FontSans({
-    subsets: ["latin"],
-    variable: "--font-sans",
-})
+    subsets: ['latin'],
+    variable: '--font-sans',
+});
+
+export const metadata: Metadata = {
+    title: 'CUI CONNECT',
+    description: 'CUI CONNECT is a platform for event management.',
+    icons: {
+        icon: '/assets/images/logo.ico', // Ensure this path is correct
+    },
+};
 
 export default function RootLayout({
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
     return (
         <ClerkProvider>
             <html lang="en" suppressHydrationWarning>
                 <body
                     className={cn(
-                        "min-h-screen w-full bg-background font-sans antialiased",
+                        'min-h-screen w-full bg-background font-sans antialiased',
                         fontSans.variable
                     )}
                 >
@@ -35,5 +44,5 @@ export default function RootLayout({
                 </body>
             </html>
         </ClerkProvider>
-    )
+    );
 }
