@@ -97,6 +97,10 @@ body {
 
     /* TYPOGRAPHY */
     /* 64 */
+    .hero-text {
+        @apply font-bold text-[45px] leading-[42px] lg:text-[45px] lg:leading-[55px] xl:text-[53px] xl:leading-[59px];
+    }
+
     .h1-bold {
         @apply font-bold text-[40px] leading-[48px] lg:text-[48px] lg:leading-[60px] xl:text-[58px] xl:leading-[74px];
     }
@@ -203,17 +207,29 @@ body {
         @apply text-[12px] font-medium leading-[20px];
     }
 
+
     /* SHADCN OVERRIDES */
+    .neuShad {
+        @apply rounded-[21px];
+        background: linear-gradient(145deg, #232323, #0e0d0d);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+    }
+
+    .neuShad-light {
+        @apply bg-white;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
     .select-field {
-        @apply w-full bg-grey-50 h-[54px] placeholder:text-grey-500 rounded-full p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent focus:ring-transparent !important;
+        @apply w-full bg-grey-50 dark:bg-zinc-800 text-gray-400 h-[54px] placeholder:text-gray-400 rounded-full p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent focus:ring-transparent !important;
     }
 
     .input-field {
-        @apply bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-grey-500 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent !important;
+        @apply bg-grey-50 dark:bg-zinc-800 h-[54px] focus-visible:ring-offset-0 placeholder:text-gray-400 rounded-full p-regular-16 px-4 py-3 border-none focus-visible:ring-transparent !important;
     }
 
     .textarea {
-        @apply bg-grey-50 flex flex-1 placeholder:text-grey-500 p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent !important;
+        @apply bg-grey-50 dark:bg-zinc-800 flex flex-1 placeholder:text-gray-400 p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent !important;
     }
 
     .button {
@@ -227,6 +243,16 @@ body {
     .toggle-switch {
         @apply bg-gray-300 !important;
     }
+
+   .bg-heroImage {
+       background-image: url('/assets/images/backgroungHero.png');
+   }
+
+   .dark .bg-heroImage {
+       background-image: none;
+       background-color: #27272a;
+       /* zinc-800 */
+   }
 }
 
 /* ========================================== CLERK STYLES */

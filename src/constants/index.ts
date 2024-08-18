@@ -5,7 +5,7 @@ export const headerLinks = [
     },
     {
         label: 'About Us',
-        route: '/aboutUs',
+        route: '/about',
     },
     {
         label: 'All Event',

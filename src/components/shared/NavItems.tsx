@@ -7,7 +7,7 @@ const NavItems = () => {
     const pathname = usePathname();
 
     return (
-        <div className='flex  md:flex-row  flex-col  justify-start items-start   text-black text-xl md:gap-12 gap-2 '>
+        <div className='flex  md:flex-row  flex-col  justify-start items-start    text-xl md:gap-12 gap-2 '>
             {
                 headerLinks.map((link, index) => {
                     const isActive = pathname === link.route;

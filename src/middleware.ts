@@ -9,7 +9,9 @@ const isPublicRoute = createRouteMatcher([
     '/sign-up',
     '/api/webhook/clerk',
     '/api/webhook/stripe',
-    '/api/uploadthing'
+    '/api/uploadthing',
+    '/events/allEvents',
+    
 ]);
 
 // Define admin routes
@@ -18,14 +20,18 @@ const isAdminRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
+    console.log("Middleware triggered for route:", req.url);
+
     const userId = auth().userId;
 
     // Check if the request is for a public route
     if (isPublicRoute(req)) {
+        console.log("Public route accessed:", req.url);
         return NextResponse.next();
     }
 
     if (!userId) {
+        console.log("User not signed in, redirecting to sign-in page");
         return NextResponse.redirect(new URL('/sign-in', req.url));
     }
 
@@ -36,17 +42,21 @@ export default clerkMiddleware(async (auth, req) => {
 
         if (isAdminRoute(req)) {
             if (isAdmin) {
+                console.log("Admin route accessed by admin user");
                 return NextResponse.next();
             } else {
+                console.log("Admin route accessed by non-admin, redirecting to home");
                 return NextResponse.redirect(new URL('/', req.url));
             }
         }
     } catch (error) {
+        console.log("Error fetching user data, redirecting to sign-in page:", error);
         return NextResponse.redirect(new URL('/sign-in', req.url));
     }
 
     return NextResponse.next();
 });
+
 
 export const config = {
     matcher: [

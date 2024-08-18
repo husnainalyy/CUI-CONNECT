@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Document, model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
@@ -6,7 +7,7 @@ export interface IOrder extends Document {
     paymentId: string;
     totalAmount: string;
     event: {_id: string, title: string};
-    buyer: {_id: string, firstName: string, lastName: string};
+    buyer: {_id: string, firstName: string, lastName: string, email: string ,username: string};
 }
 
 export type IOrderItem = {
@@ -15,7 +16,9 @@ export type IOrderItem = {
     createdAt: Date
     eventTitle: string
     eventId: string
-    buyer: string
+    buyer: string,
+    username: string,
+    email: string
 }
 
 const orderSchema = new Schema({

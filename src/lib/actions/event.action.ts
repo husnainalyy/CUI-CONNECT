@@ -112,7 +112,7 @@ export async function getAllEvents({ query, limit = 6, page, category }: GetAllE
 
         const events = await populateEvent(eventsQuery)
         const eventsCount = await Event.countDocuments(conditions)
-
+        console.log(events)
         return {
             data: JSON.parse(JSON.stringify(events)),
             totalPages: Math.ceil(eventsCount / limit),

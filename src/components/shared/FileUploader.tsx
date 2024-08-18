@@ -29,7 +29,7 @@ export function FileUploader({ imageUrl, onFieldChange, setFiles }: FileUploader
     return (
         <div
             {...getRootProps()}
-            className="flex-center  bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50">
+            className="flex-center  bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden  rounded-xl dark:bg-zinc-800">
             <input {...getInputProps()} className="cursor-pointer" />
 
             {imageUrl ? (
@@ -43,10 +43,10 @@ export function FileUploader({ imageUrl, onFieldChange, setFiles }: FileUploader
                     />
                 </div>
             ) : (
-                <div className="flex  flex-col justify-center items-center py-5 text-grey-500">
+                    <div className="flex  flex-col justify-center items-center py-5 dark:text-grey-500">
                     <Image src="/assets/upload.svg" width={77} height={77} alt="file upload" />
-                    <h3 className="mb-2 mt-2">Drag photo here</h3>
-                    <p className="p-medium-12 mb-4">SVG, PNG, JPG</p>
+                        <h3 className="mb-2 mt-2 dark:text-gray-400">Drag photo here</h3>
+                        <p className="p-medium-12 mb-4 dark:text-gray-400">SVG, PNG, JPG</p>
                     <Button type="button" className="rounded-full">
                         Select from computer
                     </Button>
