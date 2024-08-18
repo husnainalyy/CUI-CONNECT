@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'CUI CONNECT',
     description: 'CUI CONNECT is a platform for event management.',
     icons: {
-        icon: '/assets/images/logo.ico', // Ensure this path is correct
+        icon: '/favicon.ico', // Ensure this path is correct
     },
 };
 
