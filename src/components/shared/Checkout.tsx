@@ -1,48 +1,34 @@
-import React, { useEffect } from 'react'
-import { Button } from '../ui/button'
-import { IEvent } from '@/lib/dataBase/event.model'
-import { loadStripe } from '@stripe/stripe-js';
-import { checkoutOrder } from '@/lib/actions/order.action';
-
-loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-);
+import React from 'react';
+import { Button } from '../ui/button';
+import { IEvent } from '@/lib/dataBase/event.model';
+import { useRouter } from 'next/navigation';
+import querystring from 'querystring';
 
 const Checkout = ({ event, userId }: { event: IEvent, userId: string }) => {
-    
-    useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
-        const query = new URLSearchParams(window.location.search);
-        if (query.get('success')) {
-            console.log('Order placed! You will receive an email confirmation.');
-        }
+    const router = useRouter();
 
-        if (query.get('canceled')) {
-            console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
-        }
-    }, []);
+    // Function to handle form submission and redirection
+    const onCheckout = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    const onCheckout = async () => {
-        const order = {
-            eventTitle: event.title,
+        
+        // Redirect to registration page with event data
+        router.push(`/checkout?${querystring.stringify({
             eventId: event._id,
+            buyerId: userId,
+            eventTitle: event.title,
             price: event.price,
             isFree: event.isFree,
-            buyerId: userId,
-        }
-        console.log(order.buyerId);
-        await checkoutOrder(order);
-    }
+        })}`);
+    };
 
-    
     return (
-      
-        <form action={onCheckout} method="post">
-            <Button type="submit" role="link" size="lg" className="button sm:w-fit">
-                {event.isFree ? 'Get Ticket' : 'Buy Ticket'}
+        <form onSubmit={onCheckout}>
+            <Button type="submit" size="lg" className="button sm:w-fit">
+                {event.isFree ? 'Get Ticket' : 'Register'}
             </Button>
         </form>
-  )
-}
+    );
+};
 
-export default Checkout
+export default Checkout;

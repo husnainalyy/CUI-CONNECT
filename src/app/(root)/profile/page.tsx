@@ -17,15 +17,21 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
     const eventsPage = Number(searchParams?.eventsPage) || 1;
 
     const orders = await getOrdersByUser({ userId, page: ordersPage })
+    
+    const orderedEvents = orders?.data.map((order: IOrder) => ({
+        event: order.event,
+        isPaid: order.isPaid,
+        paymentStatus: order.paymentStatus,
+        price: order.price,  
+        orderId: order._id, })) || [];
 
-    const orderedEvents = orders?.data.map((order: IOrder) => order.event) || [];
-    const organizedEvents = await getEventsByUser({ userId, page: eventsPage })
+    const organizedEvents = await getEventsByUser({ userId, page: eventsPage }) 
 
     
-    const userRole = await getUserRole(userId);
+    const userRole = await getUserRole(userId); 
     const page = Number(searchParams?.page) || 1;
     const events = await getEventsByDate();
-    return (
+    return ( 
         
         <>
             {/* My Tickets */}

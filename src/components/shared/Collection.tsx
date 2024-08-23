@@ -23,19 +23,25 @@ const Collection = ({
     collectionType,
     urlParamName,
 }: CollectionProps) => {
-    return (
+    return (  
         <>
             {data.length > 0 ? (
                 <div className="flex flex-col items-center gap-10 px-4">
                     <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
-                        {data.map((event) => {
+                        {data.map((event:any) => {
                             const hasOrderLink = collectionType === 'Events_Organized';
                             const hidePrice = collectionType === 'My_Tickets';
+                            
+                            // Debuging lines
+                            // console.log("hasorderlink jnds:", hasOrderLink)
+                            // console.log("event in collection:",event)  
+                            // console.log("hideprice:",hidePrice)
+
                             return (
                                 <li key={event._id} className="flex justify-center">
                                     <Card event={event} hasOrderLink={hasOrderLink} hidePrice={hidePrice} />
                                 </li>
-                            )
+                            )  
                         })}
                     </ul>
                     {totalPages > 1 && (

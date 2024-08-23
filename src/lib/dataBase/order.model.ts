@@ -1,49 +1,98 @@
-import { useCallback } from 'react';
-import { Document, model, models, Schema } from "mongoose";
+    import { Document, model, models, Schema } from "mongoose";
 
 export interface IOrder extends Document {
     _id: string;
     createdAt: Date;
-    paymentId: string;
-    totalAmount: string;
-    event: {_id: string, title: string};
-    buyer: {_id: string, firstName: string, lastName: string, email: string ,username: string};
-}
-
-export type IOrderItem = {
-    _id: string
-    totalAmount: string
-    createdAt: Date
-    eventTitle: string
-    eventId: string
-    buyer: string,
-    username: string,
-    email: string
-}
-
-const orderSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    stripeId: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    totalAmount: {
-        type: String,
-        required: true
-    },
+    price: string;
+    phoneNumber: string;
+    emailAddress: string;
+    studentId: string;
+    semester: string;
+    department: string;
+    paymentScreenshot?: string;
+    isPaid: boolean;
+    paymentStatus: 'approved' | 'pending' | 'rejected';
     event: {
-        type: Schema.Types.ObjectId,
-        ref: 'Event'
-    },
+        _id: string;
+        title: string;
+        description: string;
+        location: string;
+        imageUrl: string;
+        startDateTime: Date;
+        endDateTime: Date;
+        price: string;
+        isFree: boolean;
+        url: string;
+        category: string;
+        organizer: {
+            _id: string;
+            firstName: string;
+            lastName: string;
+        };
+    };
     buyer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-})
+        _id: string;
+        firstName: string;
+        lastName: string;
+        email: string;
+        username: string;
+    };
+}
 
-const Order = models.Order || model('Order', orderSchema);
-export default Order
+
+    const orderSchema = new Schema({ 
+        createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+        price: {
+            type: String,
+            required: true,
+        },
+        phoneNumber: {
+            type: String,
+            required: true,
+        },
+        emailAddress: {
+            type: String,
+            required: true,
+        },
+        studentId: {
+            type: String,
+            required: true,
+        },
+        semester: {
+            type: String,
+            required: true,
+        },
+        department: {
+            type: String,
+            required: true,
+        },
+        paymentScreenshot: {
+            type: String,
+        },
+        isPaid: {
+            type: Boolean,
+            default: false,
+        },
+        paymentStatus: {
+            type: String,
+            enum: ['pending', 'approved', 'rejected'],
+            default: 'pending',
+        },
+        event: {
+            type: Schema.Types.ObjectId,
+            ref: 'Event',
+            required: true
+        },
+        buyer: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+    });
+
+
+    const Order = models.Order || model('Order', orderSchema);
+    export default Order;
