@@ -2,13 +2,13 @@ import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import type { Metadata } from 'next';
 
-import { Inter as FontSans } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/shared/theme-provider';
 
-const fontSans = FontSans({
+const roboto = Roboto({
     subsets: ['latin'],
-    variable: '--font-sans',
+    weight: ['300', '400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -29,8 +29,8 @@ export default function RootLayout({
             <html lang="en" suppressHydrationWarning>
                 <body
                     className={cn(
-                        'min-h-screen w-full bg-background font-sans antialiased',
-                        fontSans.variable
+                        'min-h-screen w-full bg-background antialiased',
+                        roboto.className
                     )}
                 >
                     <ThemeProvider
