@@ -137,7 +137,7 @@ const page = () => {
                             <h1 className='text-6xl font-bold'>GDSC</h1>
                         </div>
                         <div className="flex justify-center text-gray-400">
-                            <h1 className='text-6xl font-bold'>Youthe</h1>
+                            <h1 className='text-6xl font-bold'>CMC</h1>
                         </div>
 
                         {/* Repeat the above block for each logo */}

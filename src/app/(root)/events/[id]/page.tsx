@@ -15,15 +15,17 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
     return (
         <>
             <section className="flex justify-center bg-primary-50 dark:bg-zinc-900 bg-dotted-pattern bg-contain ">
-                <div className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl">
-                    <Image
-                        src={event.imageUrl}
-                        alt="hero image"
-                        width={1000}
-                        height={1000}
-                        className="h-full min-h-[300px] object-fit object-center"
-                    />
-                    <div className='flex w-full flex-col gap-8 p-5 md:p-10'>
+                <div className="flex flex-col  md:flex-row lg:flex-row xl:flex-row 2xl:max-w-7xl">
+                    <div className='w-full md:w-2/5 '>
+                        <Image
+                            src={event.imageUrl}
+                            alt="hero image"
+                            width={1000}
+                            height={1000}
+                            className="h-full min-h-[300px] object-fit object-center"
+                        />
+                    </div>
+                    <div className='flex w-full md:w-3/5 flex-col gap-8 py-10 px-4 dark:bg-zinc-900'>
                         <div className='flex flex-col gap-6 '>
                             <h2 className='h2-bold '>{event.title}</h2>
                             <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
@@ -44,7 +46,7 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
                         
                         <CheckoutButton event={event} />
                         
-                        <div className='flex flex-col gap-5'>
+                        <div className='flex flex-col gap-5 '>
                             <div className='flex gap-2 md:gap-3'>
                                 <Image src="/assets/calendar.svg" alt='calendar' width={32} height={32} />
                                 <div className='p-medium-16 lg:p-regular-20 flex flex-col items-center'>
@@ -63,10 +65,10 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
                                 <p className="p-medium-16 lg:p-regular-20">{event.location}</p>
                             </div>
                         </div>
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2 '>
                             <p className='p-bold-20 text-grey-600 dark:text-grey-50'>What you get:</p>
                             <p className='p-medium-16 lg:p-regular-18'>{event.description}</p>
-                            <p className='p-medium-16 lg:p-regular-18 truncate text-primary-500'>{event.url}</p>
+                            <p className='p-medium-10 lg:p-regular-18 truncate text-primary-500'>{event.url}</p>
                         </div>
                     </div>
                 </div>
