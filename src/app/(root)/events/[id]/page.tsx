@@ -12,6 +12,21 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
         eventId: event._id,
         page: searchParams.page as string,
     });
+     const [copyButtonText, setCopyButtonText] = useState('Copy URL');
+
+    // Function to handle URL copying
+    const handleCopyUrl = () => {
+        const currentUrl = window.location.href;
+        navigator.clipboard.writeText(currentUrl)
+            .then(() => {
+                setCopyButtonText('Copied!');
+                setTimeout(() => setCopyButtonText('Copy URL'), 2000); // Reset text after 2 seconds
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    };
+    
     return (
         <>
             <section className="flex justify-center bg-primary-50 dark:bg-zinc-900 bg-dotted-pattern bg-contain ">
@@ -37,10 +52,19 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
                                         {event.category.name}
                                     </p>
                                 </div>
-                                <p className='p-medium-18 ml-2 mt-2 sm:mt-0 '>
-                                    By{' '}
-                                    <span>{event.organizer.firstName} {event.organizer.lastName}</span>
-                                </p>
+                                 <div className='flex items-center'>
+                                    <p className='p-medium-18 ml-2 mt-2 sm:mt-0'>
+                                        By{' '}
+                                        <span>{event.organizer.firstName} {event.organizer.lastName}</span>
+                                    </p>
+                                    <button 
+                                        onClick={handleCopyUrl} 
+                                        className="ml-4 text-sm text-primary-500 underline"
+                                        title="Copy event URL to clipboard"
+                                    >
+                                        {copyButtonText}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         
