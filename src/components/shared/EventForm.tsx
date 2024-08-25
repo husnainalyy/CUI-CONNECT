@@ -30,25 +30,38 @@ type EventFormProps = {
 
 const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
     const [isFree, setIsFree] = useState(false)
-    const [price, setPrice] = useState<number | null>(null)
-
-    const handleIsFreeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIsFree(event.target.checked)
-    }
+    const [price, setPrice] = useState<string>("0")
 
     const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value ? parseFloat(event.target.value) : null
-        setPrice(value)
+        let value = event.target.value;
+
+        // Remove all non-numeric characters (except for decimal point)
+        value = value.replace(/[^0-9.]/g, '');
+
+        // Remove leading zeros
+        if (value.startsWith('0') && value.length > 1 && !value.includes('.')) {
+            value = value.replace(/^0+/, '');
+        }
+
+        // Set value or default to "0"
+        setPrice(value || '0');
     }
+
+
 
     const [files, setFiles] = useState<File[]>([])
     const initialValues = event && type === 'Update'
         ? {
             ...event,
             startDateTime: new Date(event.startDateTime),
-            endDateTime: new Date(event.endDateTime)
+            endDateTime: new Date(event.endDateTime),
+            price: event.price.toString() // Ensure price is a string
         }
-        : eventDefaultValues;
+        : {
+            ...eventDefaultValues,
+            price: "0" // Default to "0" for new events
+        };
+    
     const router = useRouter();
 
     const { startUpload } = useUploadThing('imageUploader')
@@ -71,6 +84,8 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
             uploadedImageUrl = uploadedImages[0].url
         }
 
+        
+        
         if (type === 'Create') {
            
             try {
@@ -80,6 +95,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                     path: '/profile'
                 })
 
+                
                 if (newEvent) {
                     form.reset();
                     router.push(`/events/${newEvent._id}`)
@@ -278,36 +294,13 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                                             {...field}
                                             className="p-regular-16 border-0 bg-grey-50 dark:bg-zinc-800 placeholder:text-gray-400 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                                             disabled={isFree}
+                                            value={price}
                                             onChange={(e) => {
                                                 field.onChange(e)
                                                 handlePriceChange(e)
                                             }}
                                         />
-                                        <FormField
-                                            control={form.control}
-                                            name="isFree"
-                                            render={({ field }) => (
-                                                <FormItem className="w-full bg-grey-50 dark:bg-zinc-800">
-                                                    <FormControl>
-                                                        <div className="flex items-center justify-end bg-grey-50 dark:bg-zinc-800">
-                                                            <label htmlFor="isFree" className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Free Ticket</label>
-                                                            <Checkbox
-                                                                onCheckedChange={(checked) => {
-                                                                    const isChecked = checked === true; // Ensure checked is a boolean
-                                                                    field.onChange(isChecked);
-                                                                    setIsFree(isChecked);
-                                                                }}
-                                                                checked={field.value}
-                                                                id="isFree"
-                                                                className="mr-2 h-5 w-5 border-2 border-primary-500"
-                                                                disabled={price !== null && price > 0}
-                                                            />
-                                                        </div>
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            )}
-                                        />
+                                       
                                     </div>
                                 </FormControl>
                                 <FormMessage />
