@@ -31,7 +31,7 @@ const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) =
                             <div className='flex flex-col gap-3 sm:flex-row sm:items-center'>
                                 <div className='flex gap-3'>
                                     <p className='p-bold-20 rounded-full bg-green-500/10 px-5 py-2 text-green-700'>
-                                    {event.isFree?'Free':`$${event.price}`}
+                                    {event.isFree?'Free':`Rs ${event.price}`}
                                     </p>
                                     <p className='p-medium-16 rounded-full bg-grey-500/10 px-4 py-2.5 text-grey-500'>
                                         {event.category.name}
