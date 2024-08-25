@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/components/shared/theme-provider';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+
 
 const roboto = Roboto({
     subsets: ['latin'],
@@ -40,6 +43,8 @@ export default function RootLayout({
                         disableTransitionOnChange
                     >
                         {children}
+                        <SpeedInsights />
+                        <Analytics />
                     </ThemeProvider>
                 </body>
             </html>
