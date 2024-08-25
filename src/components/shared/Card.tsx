@@ -67,7 +67,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
                     </p>
                     {paymentStatus && (
                         <p className={`text-sm mt-2 ${paymentStatus === 'approved' ? 'text-green-500' : paymentStatus === 'pending' ? 'text-yellow-500' : 'text-red-500'}`}>
-                            Payment Status: {paymentStatus.charAt(0).toUpperCase() + paymentStatus.slice(1)}
+                            Registartion Status: {paymentStatus.charAt(0).toUpperCase() + paymentStatus.slice(1)}
                         </p>
                     )}
                     {hasOrderLink && (
