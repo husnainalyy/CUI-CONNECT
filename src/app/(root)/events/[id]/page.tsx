@@ -4,6 +4,7 @@ import { getEventById, getRelatedEventsByCategory } from '@/lib/actions/event.ac
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import { useState } from 'react';
 
 const EventDetails = async ({ params: { id },searchParams }: SearchParamProps) => {
     const event = await getEventById(id);
