@@ -4,7 +4,7 @@ import { getEventById, getRelatedEventsByCategory } from '@/lib/actions/event.ac
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types';
 import Image from 'next/image';
-import { useRef } from 'react';
+import CopyButton from '@/components/shared/CopyButton'; // Import the client component
 
 const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
     const event = await getEventById(id);
@@ -13,27 +13,6 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
         eventId: event._id,
         page: searchParams.page as string,
     });
-
-    const copyButtonRef = useRef<HTMLButtonElement>(null);
-
-    // Function to handle URL copying
-    const handleCopyUrl = () => {
-        const currentUrl = window.location.href;
-        navigator.clipboard.writeText(currentUrl)
-            .then(() => {
-                if (copyButtonRef.current) {
-                    copyButtonRef.current.textContent = 'Copied!';
-                    setTimeout(() => {
-                        if (copyButtonRef.current) {
-                            copyButtonRef.current.textContent = 'Copy URL';
-                        }
-                    }, 2000); // Reset text after 2 seconds
-                }
-            })
-            .catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-    };
 
     return (
         <>
@@ -65,14 +44,7 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
                                         By{' '}
                                         <span>{event.organizer.firstName} {event.organizer.lastName}</span>
                                     </p>
-                                    <button 
-                                        onClick={handleCopyUrl} 
-                                        ref={copyButtonRef} 
-                                        className="ml-4 text-sm text-primary-500 underline"
-                                        title="Copy event URL to clipboard"
-                                    >
-                                        Copy URL
-                                    </button>
+                                    <CopyButton /> {/* Use the client component */}
                                 </div>
                             </div>
                         </div>
@@ -106,7 +78,6 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
                     </div>
                 </div>
             </section>
-            {/* EVENTS with the same category */}
             <section className='wrapper my-8 flex flex-col gap-8 md:gap-12'>
                 <h2 className='h2-bold pl-4'>More Events Like This</h2>
                 <Collection
