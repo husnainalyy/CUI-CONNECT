@@ -1,8 +1,11 @@
 // next-sitemap.config.js
-module.exports = {
+/** @type {import('next-sitemap').IConfig} */
+const config = {
     siteUrl: 'https://cui-connect.vercel.app',
-    generateRobotsTxt: true,
-    // Optional settings
-    changefreq: 'daily', // Set the frequency with which the page is likely to change
-    priority: 0.7,      // Set the priority of the page
+    generateRobotsTxt: true, // (optional) Generate robots.txt file
+    changefreq: 'daily',
+    priority: 0.7,
+    // Additional settings if needed
 };
+
+module.exports = config;
